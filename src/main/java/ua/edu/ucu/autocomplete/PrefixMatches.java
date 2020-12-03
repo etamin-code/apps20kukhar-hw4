@@ -45,8 +45,8 @@ public class PrefixMatches {
 
     public Iterable<String> wordsWithPrefix(String pref) {
         if (pref.length() < 2) {
-            throw new IllegalArgumentException
-                    ("pref must has at least 2 chars");
+            throw new IllegalArgumentException(
+                    "pref must has at least 2 chars");
         }
         return trie.wordsWithPrefix(pref);
     }
@@ -56,8 +56,8 @@ public class PrefixMatches {
             throw new IllegalArgumentException
                     ("pref must has at least 2 chars");
         }
-        ArrayList<String> words =
-                (ArrayList<String>) trie.wordsWithPrefix(pref);
+        ArrayList<String> words = (ArrayList<String>)
+                                   trie.wordsWithPrefix(pref);
         words.removeIf(word -> word.length() > 2 + k);
         return words;
     }
