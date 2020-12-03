@@ -78,6 +78,7 @@ public class RWayTrie implements Trie {
     public Iterable<String> wordsWithPrefix(String s) {
         Letter curNode = root;
         ArrayList<String> words = new ArrayList<>();
+
         for (int i = 0; i < s.length(); i++) {
             if (curNode.hasChild(s.charAt(i))) {
                 curNode = curNode.getChild(s.charAt(i));
@@ -90,7 +91,6 @@ public class RWayTrie implements Trie {
         }
 
         Queue queue = new Queue(new ImmutableLinkedList());
-        Letter letter;
         queue.enqueue(curNode);
         while (!queue.isEmpty()) {
             curNode = (Letter) queue.peek();

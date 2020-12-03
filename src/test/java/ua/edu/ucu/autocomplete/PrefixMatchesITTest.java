@@ -13,12 +13,15 @@ import ua.edu.ucu.tries.RWayTrie;
  */
 public class PrefixMatchesITTest {
 
-    private PrefixMatches pm;
+    private PrefixMatches pm, pm1;
 
     @Before
     public void init() {
         pm = new PrefixMatches(new RWayTrie());
         pm.load("abc", "abce", "abcd", "abcde", "abcdef");
+
+        pm1 = new PrefixMatches(new RWayTrie());
+        pm1.load("qabc", "abce", "wabcd", "abcde", "arbcdef");
     }
 
     @Test
@@ -26,6 +29,24 @@ public class PrefixMatchesITTest {
         String pref = "ab";
         Iterable<String> result = pm.wordsWithPrefix(pref);
         String[] expResult = {"abc", "abce", "abcd", "abcde", "abcdef"};
+
+        assertThat(result, containsInAnyOrder(expResult));
+    }
+
+    @Test
+    public void testWordsWithPrefix1_String() {
+        String pref = "ab";
+        Iterable<String> result = pm1.wordsWithPrefix(pref);
+        String[] expResult = {"abce", "abcde"};
+
+        assertThat(result, containsInAnyOrder(expResult));
+    }
+
+    @Test
+    public void testWordsWithNotExistingPrefix_String() {
+        String pref = "abz";
+        Iterable<String> result = pm1.wordsWithPrefix(pref);
+        String[] expResult = { };
 
         assertThat(result, containsInAnyOrder(expResult));
     }
@@ -41,5 +62,7 @@ public class PrefixMatchesITTest {
 
         assertThat(result, containsInAnyOrder(expResult));
     }
+
+
 
 }
